@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS Platform;
 CREATE TABLE Platform (
                           PlatformID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -5,7 +6,7 @@ CREATE TABLE Platform (
                           PRIMARY KEY (PlatformID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `Platform` VALUES ('1', 'admin');
+# INSERT INTO `Platform` VALUES ('1', 'admin');
 -- 用户表
 DROP TABLE IF EXISTS User;
 CREATE TABLE User (

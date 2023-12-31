@@ -21,4 +21,23 @@ public class GoodController {
         String goodname = requestGood.getGoodName();
         return goodService.getGoodByGoodName(goodname);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "api/addGood")
+    @ResponseBody
+    public String addGood(@RequestBody Good requstGood) {
+        String goodName = requstGood.getGoodName();
+        String goodDescription = requstGood.getGoodDescription();
+        int merchantID = requstGood.getMerchantID();
+        int platformID = requstGood.getPlatformID();
+        double currentPrice = requstGood.getCurrentPrice();
+        Good good = new Good();
+        good.setGoodName(goodName);
+        good.setGoodDescription(goodDescription);
+        good.setMerchantID(merchantID);
+        good.setPlatformID(platformID);
+        good.setCurrentPrice(currentPrice);
+        goodService.addGood(good);
+        return "success";
+    }
 }

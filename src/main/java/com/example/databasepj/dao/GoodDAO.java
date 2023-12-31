@@ -20,6 +20,7 @@ public class GoodDAO {
     }
 
     public void addGood(Good good) {
+//        System.out.println(good);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO good (goodName, goodDescription, merchantID, platformID, currentPrice) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, good.getGoodName());
