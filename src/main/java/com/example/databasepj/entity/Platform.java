@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class Platform {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "platformID")
+    @Column(name = "PlatformID")
     private int platformID;
     private String platformName;
 
