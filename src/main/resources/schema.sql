@@ -26,8 +26,7 @@ CREATE TABLE Merchant (
                           MerchantInfo VARCHAR(255) NOT NULL,
                           MerchantAddress VARCHAR(255) NOT NULL,
                           UserID INT NOT NULL,
-                          PRIMARY KEY (MerchantID),
-                          FOREIGN KEY (UserID) REFERENCES User(UserID)
+                          PRIMARY KEY (MerchantID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- 商品表
@@ -41,12 +40,11 @@ CREATE TABLE Product (
                          ProductOrigin VARCHAR(255) NOT NULL,
                          ProductionDate DATE NOT NULL,
                          ShelfLife INT NOT NULL,
-                         PRIMARY KEY (ProductID),
-                         FOREIGN KEY (MerchantID) REFERENCES Merchant(MerchantID),
-                         FOREIGN KEY (PlatformID) REFERENCES Platform(PlatformID)
+                         PRIMARY KEY (ProductID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- 发布商品表
+DROP TABLE IF EXISTS Good;
 CREATE TABLE Good (
                          GoodID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
                          GoodName VARCHAR(255) NOT NULL,
@@ -54,9 +52,7 @@ CREATE TABLE Good (
                          MerchantID INT NOT NULL,
                          PlatformID INT NOT NULL,
                          CurrentPrice DECIMAL(10, 2) NOT NULL,
-                         PRIMARY KEY (GoodID),
-                         FOREIGN KEY (MerchantID) REFERENCES Merchant(MerchantID),
-                         FOREIGN KEY (PlatformID) REFERENCES Platform(PlatformID)
+                         PRIMARY KEY (GoodID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -- 商品价格信息表
 DROP TABLE IF EXISTS ProductPriceInfo;
@@ -65,8 +61,7 @@ CREATE TABLE ProductPriceInfo (
                                   GoodID INT NOT NULL,
                                   PriceDate DATE NOT NULL,
                                   HistoricalPrice DECIMAL(10, 2) NOT NULL,
-                                  PRIMARY KEY (ProductPriceInfoID),
-                                  FOREIGN KEY (GoodID) REFERENCES Product(ProductID)
+                                  PRIMARY KEY (ProductPriceInfoID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- 收藏信息表
@@ -76,7 +71,5 @@ CREATE TABLE FavoriteInfo (
                               UserID INT NOT NULL,
                               GoodID INT NOT NULL,
                               PriceFloor DECIMAL(10, 2) NOT NULL,
-                              PRIMARY KEY (FavoriteInfoID),
-                              FOREIGN KEY (UserID) REFERENCES User(UserID),
-                              FOREIGN KEY (GoodID) REFERENCES Product(ProductID)
+                              PRIMARY KEY (FavoriteInfoID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
