@@ -52,12 +52,14 @@ CREATE TABLE Good (
                          MerchantID INT NOT NULL,
                          PlatformID INT NOT NULL,
                          CurrentPrice DECIMAL(10, 2) NOT NULL,
+                         Modified INT DEFAULT 0,
                          PRIMARY KEY (GoodID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -- 商品价格信息表
 DROP TABLE IF EXISTS ProductPriceInfo;
 CREATE TABLE ProductPriceInfo (
                                   ProductPriceInfoID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+                                  ProductID INT NOT NULL,
                                   GoodID INT NOT NULL,
                                   PriceDate DATE NOT NULL,
                                   HistoricalPrice DECIMAL(10, 2) NOT NULL,

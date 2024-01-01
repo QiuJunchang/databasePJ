@@ -20,7 +20,6 @@ VALUES
     ('面包', '烘焙食品', '本地', '2023-01-01', 5),
     ('蛋糕', '烘焙食品', '本地', '2023-01-01', 5);
 
--- 商家1的默认数据
 -- 商家1的商品数据
 INSERT INTO Good (GoodName, GoodDescription, MerchantID, PlatformID, CurrentPrice, ProductID)
 VALUES
@@ -39,3 +38,13 @@ VALUES
     ('橙子', '甜美橙子', 3, 1, 1.99, 2),
     ('面包', '香软面包', 3, 1, 1.99, 5),
     ('酸奶', '乳制品', 3, 1, 3.99, 4);
+
+INSERT INTO ProductPriceInfo (ProductID, GoodID, PriceDate, HistoricalPrice)
+VALUES
+    (1, 1, '2023-01-01', 2.99),
+    (1, 3, '2023-01-01', 3.49),
+    (2, 2, '2023-01-01', 1.99),
+    (3, 4, '2023-01-01', 3.49),
+    (2, 5, '2023-01-01', 1.99),
+    (5, 6, '2023-01-01', 1.99),
+    (4, 7, '2023-01-01', 3.99);
