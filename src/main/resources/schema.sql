@@ -50,6 +50,7 @@ CREATE TABLE Good (
                          GoodID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
                          GoodName VARCHAR(255) NOT NULL,
                          GoodDescription VARCHAR(255) NOT NULL,
+                         ProductID INT NOT NULL,
                          MerchantID INT NOT NULL,
                          PlatformID INT NOT NULL,
                          CurrentPrice DECIMAL(10, 2) NOT NULL,

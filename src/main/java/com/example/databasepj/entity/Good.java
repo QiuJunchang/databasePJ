@@ -13,6 +13,7 @@ public class Good {
     private int goodID;
     private String goodName;
     private String goodDescription;
+    private int productID;
     private int merchantID;
     private int platformID;
     private double currentPrice;
@@ -41,6 +42,13 @@ public class Good {
         this.goodDescription = goodDescription;
     }
 
+    public int getProductID(){
+        return productID;
+    }
+
+    public void setProductID(int productID){
+        this.productID = productID;
+    }
     public int getMerchantID(){
         return merchantID;
     }

@@ -44,6 +44,7 @@ public class GoodDAO {
                 good.setGoodID(resultSet.getInt("GoodID"));
                 good.setGoodName(resultSet.getString("goodName"));
                 good.setGoodDescription(resultSet.getString("goodDescription"));
+                good.setProductID(resultSet.getInt("productID"));
                 good.setMerchantID(resultSet.getInt("merchantID"));
                 good.setPlatformID(resultSet.getInt("platformID"));
                 good.setCurrentPrice(resultSet.getDouble("currentPrice"));

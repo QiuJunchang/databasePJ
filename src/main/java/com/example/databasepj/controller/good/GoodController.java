@@ -28,12 +28,14 @@ public class GoodController {
     public String addGood(@RequestBody Good requstGood) {
         String goodName = requstGood.getGoodName();
         String goodDescription = requstGood.getGoodDescription();
+        int productID = requstGood.getProductID();
         int merchantID = requstGood.getMerchantID();
         int platformID = requstGood.getPlatformID();
         double currentPrice = requstGood.getCurrentPrice();
         Good good = new Good();
         good.setGoodName(goodName);
         good.setGoodDescription(goodDescription);
+        good.setProductID(productID);
         good.setMerchantID(merchantID);
         good.setPlatformID(platformID);
         good.setCurrentPrice(currentPrice);
