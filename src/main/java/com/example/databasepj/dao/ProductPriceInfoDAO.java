@@ -5,79 +5,41 @@ import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 @Component
 public class ProductPriceInfoDAO {
-    private final String url;
-    private final String username;
-    private final String password;
+    private Connection connection;
 
     public ProductPriceInfoDAO(){
-        this.url = "jdbc:mysql://localhost:3306/pj";
-        this.username = "admin";
-        this.password = "123";
-    }
-    public ProductPriceInfoDAO(String url, String username, String password) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
-    }
-
-    public List<ProductPriceInfo> getAllProductPriceInfo() {
-        List<ProductPriceInfo> productPriceInfos = new ArrayList<>();
-
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM productpriceinfo")) {
-
-            while (resultSet.next()) {
-                ProductPriceInfo productPriceInfo = new ProductPriceInfo();
-                productPriceInfo.setProductPriceInfoID(resultSet.getInt("ProductPriceInfoID"));
-                productPriceInfo.setGoodID(resultSet.getInt("goodID"));
-                productPriceInfo.setPriceDate(resultSet.getDate("priceDate"));
-                productPriceInfo.setHistoricalPrice(resultSet.getDouble("historicalPrice"));
-                productPriceInfos.add(productPriceInfo);
-            }
-
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pj", "admin", "123");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return productPriceInfos;
     }
 
-    public ProductPriceInfo getProductPriceInfoById(int productPriceInfoId) {
-        ProductPriceInfo productPriceInfo = null;
-
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM productpriceinfo WHERE ProductPriceInfoID = ?")) {
-
-            statement.setInt(1, productPriceInfoId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    productPriceInfo = new ProductPriceInfo();
-                    productPriceInfo.setProductPriceInfoID(resultSet.getInt("ProductPriceInfoID"));
-                    productPriceInfo.setGoodID(resultSet.getInt("goodID"));
-                    productPriceInfo.setPriceDate(resultSet.getDate("priceDate"));
-                    productPriceInfo.setHistoricalPrice(resultSet.getDouble("historicalPrice"));
+    public void saveProductPriceInfo(Date date) {
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int goodID = resultSet.getInt("goodID");
+                int productID = resultSet.getInt("productID");
+                Double price = resultSet.getDouble("price");
+                int modified = resultSet.getInt("modified");
+                if(modified == 0) {
+                    PreparedStatement preparedStatement1 = connection.prepareStatement("INSERT INTO productpriceinfo (ProductID, GoodID, PriceDate, HistoricalPrice) VALUES  (?, ?, ?, ?)");
+                    preparedStatement1.setInt(1, productID);
+                    preparedStatement1.setInt(2, goodID);
+                    preparedStatement1.setDate(3, date);
+                    preparedStatement1.setDouble(4, price);
+                    preparedStatement1.executeUpdate();
+                }
+                else {
+                    resultSet.updateInt("modified",0);
                 }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return productPriceInfo;
-    }
-
-    public void saveProductPriceInfo(ProductPriceInfo productPriceInfo) {
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO productpriceinfo (goodID, priceDate, historicalPrice) VALUES (?, ?, ?)")) {
-
-            statement.setInt(1, productPriceInfo.getGoodID());
-            statement.setDate(2, productPriceInfo.getPriceDate());
-            statement.setDouble(3, productPriceInfo.getHistoricalPrice());
-            statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

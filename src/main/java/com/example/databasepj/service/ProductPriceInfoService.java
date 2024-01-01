@@ -5,22 +5,15 @@ import com.example.databasepj.entity.ProductPriceInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 @Service
 public class ProductPriceInfoService {
     @Autowired
     private ProductPriceInfoDAO productPriceInfoDAO;
 
-    public List<ProductPriceInfo> getAllProductPriceInfo() {
-        return productPriceInfoDAO.getAllProductPriceInfo();
-    }
-
-    public ProductPriceInfo getProductPriceInfoById(int productPriceInfoId) {
-        return productPriceInfoDAO.getProductPriceInfoById(productPriceInfoId);
-    }
-
-    public void saveProductPriceInfo(ProductPriceInfo productPriceInfo) {
-        productPriceInfoDAO.saveProductPriceInfo(productPriceInfo);
+    public void saveProductPriceInfo(Date date){
+        productPriceInfoDAO.saveProductPriceInfo(date);
     }
 
     // 其他自定义方法...
