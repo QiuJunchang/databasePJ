@@ -36,8 +36,6 @@ CREATE TABLE Product (
                          ProductID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
                          ProductName VARCHAR(255) NOT NULL,
                          ProductCategory VARCHAR(255) NOT NULL,
-                         MerchantID INT NOT NULL,
-                         PlatformID INT NOT NULL,
                          ProductOrigin VARCHAR(255) NOT NULL,
                          ProductionDate DATE NOT NULL,
                          ShelfLife INT NOT NULL,

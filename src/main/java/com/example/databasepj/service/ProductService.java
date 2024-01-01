@@ -1,6 +1,7 @@
 package com.example.databasepj.service;
 
 import com.example.databasepj.dao.ProductDAO;
+import com.example.databasepj.entity.Good;
 import com.example.databasepj.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,12 @@ public class ProductService {
     private ProductDAO productDAO;
 
     public ProductService(ProductDAO productDAO) {
-        this.productDAO = productDAO;
+        productDAO =  new ProductDAO();
     }
 
+    public void addProduct(Product product) {
+        productDAO.addProduct(product);
+    }
     public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
     }

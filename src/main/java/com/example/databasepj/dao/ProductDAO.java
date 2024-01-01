@@ -1,5 +1,6 @@
 package com.example.databasepj.dao;
 
+import com.example.databasepj.entity.Good;
 import com.example.databasepj.entity.Product;
 import org.springframework.stereotype.Component;
 
@@ -9,21 +10,37 @@ import java.util.List;
 
 @Component
 public class ProductDAO {
+
+    private Connection connection;
     private final String url;
     private final String username;
     private final String password;
 
-    public ProductDAO(){
+    public ProductDAO() {
         this.url = "jdbc:mysql://localhost:3306/pj";
         this.username = "admin";
         this.password = "123";
+        // 在构造函数中初始化数据库连接
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pj", "admin", "123");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-    public ProductDAO(String url, String username, String password) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
+    public void addProduct(Product product) {
+//        System.out.println(good);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO product (productName, productCategory, productOrigin, productionDate, shelfLife) VALUES (?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, product.getProductName());
+            preparedStatement.setString(2, product.getProductCategory());
+            preparedStatement.setString(3, product.getProductOrigin());
+            preparedStatement.setDate(4, product.getProductionDate());
+            preparedStatement.setInt(5, product.getShelfLife());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
 

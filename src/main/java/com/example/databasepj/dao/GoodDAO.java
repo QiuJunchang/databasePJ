@@ -22,12 +22,13 @@ public class GoodDAO {
     public void addGood(Good good) {
 //        System.out.println(good);
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO good (goodName, goodDescription, merchantID, platformID, currentPrice) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO good (goodName, goodDescription, productID, merchantID, platformID, currentPrice) VALUES (?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, good.getGoodName());
             preparedStatement.setString(2, good.getGoodDescription());
-            preparedStatement.setInt(3, good.getMerchantID());
-            preparedStatement.setInt(4, good.getPlatformID());
-            preparedStatement.setDouble(5, good.getCurrentPrice());
+            preparedStatement.setInt(3, good.getProductID());
+            preparedStatement.setInt(4, good.getMerchantID());
+            preparedStatement.setInt(5, good.getPlatformID());
+            preparedStatement.setDouble(6, good.getCurrentPrice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
