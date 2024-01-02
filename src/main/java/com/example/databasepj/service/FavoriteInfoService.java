@@ -12,16 +12,8 @@ public class FavoriteInfoService {
     @Autowired
     private FavoriteInfoDAO favoriteInfoDAO;
 
-    public List<FavoriteInfo> getAllFavoriteInfo() {
-        return favoriteInfoDAO.getAllFavoriteInfo();
-    }
-
-    public FavoriteInfo getFavoriteInfoById(int favoriteInfoId) {
-        return favoriteInfoDAO.getFavoriteInfoById(favoriteInfoId);
-    }
-
-    public void saveFavoriteInfo(FavoriteInfo favoriteInfo) {
-        favoriteInfoDAO.saveFavoriteInfo(favoriteInfo);
+    public void addFavoriteInfo(FavoriteInfo favoriteInfo){
+        favoriteInfoDAO.addFavoriteInfo(favoriteInfo);
     }
 
     // 其他自定义方法...
