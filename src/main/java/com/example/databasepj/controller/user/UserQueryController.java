@@ -1,8 +1,10 @@
 package com.example.databasepj.controller.user;
 
 import com.example.databasepj.entity.Good;
+import com.example.databasepj.entity.ProductPriceInfo;
 import com.example.databasepj.service.GoodService;
 import com.example.databasepj.service.ProductService;
+import com.example.databasepj.service.ProductPriceInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +22,9 @@ public class UserQueryController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    ProductPriceInfoService productPriceInfoService;
+
     @CrossOrigin
     @RequestMapping(value = "api/getAllGoods")
     @ResponseBody
@@ -35,4 +40,10 @@ public class UserQueryController {
         return goodService.getGoodsByProductID(productID);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "api/getPriceInfoByGoodID")
+    @ResponseBody
+    public List<ProductPriceInfo> getPriceInfoByGoodID(@RequestBody int goodID) {
+        return productPriceInfoService.getPriceInfoByGoodID(goodID);
+    }
 }

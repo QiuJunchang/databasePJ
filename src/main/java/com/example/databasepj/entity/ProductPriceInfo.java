@@ -13,6 +13,7 @@ public class ProductPriceInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductPriceInfoID")
     private int productPriceInfoID;
+    private int productID;
     private int goodID;
     private Date priceDate;
     private double historicalPrice;
@@ -29,6 +30,9 @@ public class ProductPriceInfo {
         return goodID;
     }
 
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
     public void setGoodID(int goodID) {
         this.goodID = goodID;
     }

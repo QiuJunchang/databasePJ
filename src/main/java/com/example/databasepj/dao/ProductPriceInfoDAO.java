@@ -1,5 +1,6 @@
 package com.example.databasepj.dao;
 
+import com.example.databasepj.entity.Good;
 import com.example.databasepj.entity.ProductPriceInfo;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,24 @@ public class ProductPriceInfoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public List<ProductPriceInfo> getPriceInfoByGoodID(int goodID){
+        List<ProductPriceInfo> prices = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM productpriceinfo WHERE GoodID = ?");
+            preparedStatement.setInt(1, goodID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ProductPriceInfo price = new ProductPriceInfo();
+                price.setProductID(resultSet.getInt("productID"));
+                price.setPriceDate(resultSet.getDate("priceDate"));
+                price.setHistoricalPrice(resultSet.getDouble("historicalPrice"));
+                prices.add(price);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prices;
     }
 
     // 其他自定义方法...
