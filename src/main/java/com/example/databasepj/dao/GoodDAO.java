@@ -99,6 +99,28 @@ public class GoodDAO {
         return goods;
     }
 
+    public List<Good> getGoodsByProductID(int productID) {
+        List<Good> goods = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM good WHERE ProductID = ?");
+            preparedStatement.setInt(1, productID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Good good = new Good();
+                good.setGoodID(resultSet.getInt("GoodID"));
+                good.setGoodName(resultSet.getString("goodName"));
+                good.setGoodDescription(resultSet.getString("goodDescription"));
+                good.setMerchantID(resultSet.getInt("merchantID"));
+                good.setPlatformID(resultSet.getInt("platformID"));
+                good.setCurrentPrice(resultSet.getDouble("currentPrice"));
+                goods.add(good);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return goods;
+    }
+
     public void updateGood(Good good) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE good SET goodName = ?, goodDescription = ?, merchantID = ?, platformID = ?, currentPrice = ? WHERE GoodID = ?");

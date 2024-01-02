@@ -32,6 +32,8 @@ public class GoodService {
         return goodDAO.getAllGoods();
     }
 
+    public List<Good> getGoodsByProductID(int productID) {return goodDAO.getGoodsByProductID(productID);}
+
     public void updateGood(Good good) {
         goodDAO.updateGood(good);
     }

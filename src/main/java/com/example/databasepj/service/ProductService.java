@@ -28,6 +28,10 @@ public class ProductService {
         return productDAO.getProductById(productId);
     }
 
+    public Product getProductByName(String productName) {
+        return productDAO.getProductByName(productName);
+    }
+
     public void saveProduct(Product product) {
         productDAO.saveProduct(product);
     }

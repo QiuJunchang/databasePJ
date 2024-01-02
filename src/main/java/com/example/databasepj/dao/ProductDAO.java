@@ -96,6 +96,32 @@ public class ProductDAO {
         return product;
     }
 
+    public Product getProductByName(String productName) {
+        Product product = null;
+
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE ProductName = ?")) {
+
+            statement.setString(1, productName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = new Product();
+                    product.setProductID(resultSet.getInt("ProductID"));
+                    product.setProductName(resultSet.getString("productName"));
+                    product.setProductCategory(resultSet.getString("productCategory"));
+                    product.setProductOrigin(resultSet.getString("productOrigin"));
+                    product.setProductionDate(resultSet.getDate("productionDate"));
+                    product.setShelfLife(resultSet.getInt("shelfLife"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return product;
+    }
+
     public void saveProduct(Product product) {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO product (productName, productCategory, merchantID, platformID, productOrigin, productionDate, shelfLife) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
