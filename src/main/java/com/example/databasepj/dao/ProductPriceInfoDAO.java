@@ -53,6 +53,7 @@ public class ProductPriceInfoDAO {
             while (resultSet.next()) {
                 ProductPriceInfo price = new ProductPriceInfo();
                 price.setProductID(resultSet.getInt("productID"));
+                price.setGoodID(goodID);
                 price.setPriceDate(resultSet.getDate("priceDate"));
                 price.setHistoricalPrice(resultSet.getDouble("historicalPrice"));
                 prices.add(price);

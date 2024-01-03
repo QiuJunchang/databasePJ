@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class GoodController {
     @Autowired
@@ -21,6 +23,7 @@ public class GoodController {
         String goodname = requestGood.getGoodName();
         return goodService.getGoodByGoodName(goodname);
     }
+
 
     @CrossOrigin
     @RequestMapping(value = "api/addGood")
