@@ -53,4 +53,22 @@ public class ProductPriceInfoFilter {
 
         return filteredList;
     }
+
+
+    public int LowestPrice(List<ProductPriceInfo> productPriceInfos){
+        if (productPriceInfos.isEmpty()) {
+            throw new IllegalArgumentException("The productPriceInfos list is empty.");
+        }
+        int index = 0;
+        double lowestPrice = productPriceInfos.get(0).getHistoricalPrice();
+
+        for (ProductPriceInfo productPriceInfo : productPriceInfos) {
+            double currentPrice = productPriceInfo.getHistoricalPrice();
+            if (currentPrice < lowestPrice) {
+                lowestPrice = currentPrice;
+                index = productPriceInfos.indexOf(productPriceInfo);
+            }
+        }
+        return index;
+    }
 }

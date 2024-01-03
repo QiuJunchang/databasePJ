@@ -6,6 +6,7 @@ import com.example.databasepj.service.GoodService;
 import com.example.databasepj.service.ProductService;
 import com.example.databasepj.service.ProductPriceInfoService;
 import com.example.databasepj.tools.ProductPriceInfoFilter;
+import com.example.databasepj.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -62,5 +63,21 @@ public class UserQueryController {
         else if (mode == 1) return productPriceInfoFilter.filterByLast30Days(products);
         else if (mode == 2) return productPriceInfoFilter.filterByLastYear(products);
         else return null;
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "api/getPriceInfoWithDateAndLowestPrice")
+    @ResponseBody
+    public Result queryGoodWithDateAndLowestPrice(@RequestBody Map<String, Integer> param) {
+        int goodID = param.get("goodID");
+        int mode = param.get("dateMode");
+        List<ProductPriceInfo> products = productPriceInfoService.getPriceInfoByGoodID(goodID);
+        int index = productPriceInfoFilter.LowestPrice(products);
+        String message = "历史最近价: " + String.valueOf(products.get(index).getHistoricalPrice())
+                + "  最低价开始日期: " + products.get(index).getPriceDate();
+        if (mode == 0) return new Result(message, productPriceInfoFilter.filterByLast7Days(products));
+        else if (mode == 1) return new Result(message, productPriceInfoFilter.filterByLast30Days(products));
+        else if (mode == 2) return new Result(message, productPriceInfoFilter.filterByLastYear(products));
+        else return new Result("不存在相关记录", null);
     }
 }
