@@ -72,4 +72,5 @@ public class Good {
     public void setCurrentPrice(double currentPrice){
         this.currentPrice = currentPrice;
     }
+
 }

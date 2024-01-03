@@ -35,6 +35,29 @@ public class GoodDAO {
         }
     }
 
+    public String updatePrice(Good good) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM good WHERE GoodID = ?");
+            preparedStatement.setInt(1, good.getGoodID());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int modified = resultSet.getInt("Modified");
+            if (modified == 0) {
+                preparedStatement = connection.prepareStatement("UPDATE good SET Modified = 1, CurrentPrice = ? WHERE GoodID = ?");
+                preparedStatement.setDouble(1, good.getCurrentPrice());
+                preparedStatement.setInt(2, good.getGoodID());
+                preparedStatement.execute();
+                return "success";
+            }
+            else {
+                return "failed";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Good getGoodById(int goodID) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM good WHERE GoodID = ?");

@@ -45,4 +45,16 @@ public class GoodController {
         goodService.addGood(good);
         return "success";
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "api/updatePrice")
+    @ResponseBody
+    public String updatePrice(@RequestBody Good requstGood){
+        int goodID = requstGood.getGoodID();
+        double newPrice = requstGood.getCurrentPrice();
+        Good good = new Good();
+        good.setGoodID(goodID);
+        good.setCurrentPrice(newPrice);
+        return goodService.updatePrice(good);
+    }
 }

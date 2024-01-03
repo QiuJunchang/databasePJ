@@ -20,6 +20,10 @@ public class GoodService {
         goodDAO.addGood(good);
     }
 
+    public String updatePrice(Good good) {
+        return goodDAO.updatePrice(good);
+    }
+
     public Good getGoodById(int goodID) {
         return goodDAO.getGoodById(goodID);
     }
