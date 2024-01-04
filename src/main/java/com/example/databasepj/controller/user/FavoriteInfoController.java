@@ -4,6 +4,7 @@ import com.example.databasepj.entity.FavoriteInfo;
 import com.example.databasepj.entity.Good;
 import com.example.databasepj.service.FavoriteInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +29,12 @@ public class FavoriteInfoController {
         favoriteInfo.setPriceFloor(priceFloor);
         favoriteInfoService.addFavoriteInfo(favoriteInfo);
         return "success";
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "api/informFavorite")
+    @ResponseBody
+    public String informFavorite() {
+        return "mmmm";
     }
 }
