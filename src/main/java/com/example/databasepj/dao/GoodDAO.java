@@ -1,5 +1,6 @@
 package com.example.databasepj.dao;
 
+import com.example.databasepj.entity.FavoriteInfo;
 import com.example.databasepj.entity.Good;
 import org.springframework.stereotype.Component;
 
@@ -52,6 +53,29 @@ public class GoodDAO {
             else {
                 return "failed";
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<FavoriteInfo> checkInform(Good good){
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT * FROM favoriteinfo WHERE GoodID = ? and PriceFloor >= ?");
+            ps.setInt(1, good.getGoodID());
+            ps.setDouble(2,good.getCurrentPrice());
+            ResultSet rs = ps.executeQuery();
+            List<FavoriteInfo> infos = new ArrayList<>();
+            while(rs.next()) {
+                FavoriteInfo info = new FavoriteInfo();
+                info.setFavoriteInfoID(rs.getInt(1));
+                info.setUserID(rs.getInt(2));
+                info.setGoodID(rs.getInt(3));
+                info.setPriceFloor(rs.getDouble(4));
+                infos.add(info);
+            }
+            return infos;
         } catch (SQLException e) {
             e.printStackTrace();
         }

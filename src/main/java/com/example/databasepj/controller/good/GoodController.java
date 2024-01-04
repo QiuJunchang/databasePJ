@@ -2,6 +2,7 @@ package com.example.databasepj.controller.good;
 
 import com.example.databasepj.entity.Good;
 import com.example.databasepj.service.GoodService;
+import com.example.databasepj.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,7 +50,7 @@ public class GoodController {
     @CrossOrigin
     @RequestMapping(value = "api/updatePrice")
     @ResponseBody
-    public String updatePrice(@RequestBody Good requstGood){
+    public Result updatePrice(@RequestBody Good requstGood){
         int goodID = requstGood.getGoodID();
         double newPrice = requstGood.getCurrentPrice();
         Good good = new Good();

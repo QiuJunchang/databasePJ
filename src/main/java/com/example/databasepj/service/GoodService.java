@@ -2,6 +2,7 @@ package com.example.databasepj.service;
 
 import com.example.databasepj.dao.GoodDAO;
 import com.example.databasepj.entity.Good;
+import com.example.databasepj.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ public class GoodService {
         goodDAO.addGood(good);
     }
 
-    public String updatePrice(Good good) {
-        return goodDAO.updatePrice(good);
+    public Result updatePrice(Good good) {
+        return new Result(goodDAO.updatePrice(good), goodDAO.checkInform(good).size(), goodDAO.checkInform(good));
     }
 
     public Good getGoodById(int goodID) {
