@@ -15,8 +15,6 @@ public class Product {
     private int productID;
     private String productName;
     private String productCategory;
-    private int merchantID;
-    private int platformID;
     private String productOrigin;
     private Date productionDate;
     private int shelfLife;
@@ -43,22 +41,6 @@ public class Product {
 
     public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
-    }
-
-    public int getMerchantID() {
-        return merchantID;
-    }
-
-    public void setMerchantID(int merchantID) {
-        this.merchantID = merchantID;
-    }
-
-    public int getPlatformID() {
-        return platformID;
-    }
-
-    public void setPlatformID(int platformID) {
-        this.platformID = platformID;
     }
 
     public String getProductOrigin() {

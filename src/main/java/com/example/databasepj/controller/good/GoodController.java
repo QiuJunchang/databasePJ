@@ -1,7 +1,10 @@
 package com.example.databasepj.controller.good;
 
 import com.example.databasepj.entity.Good;
+import com.example.databasepj.entity.Product;
 import com.example.databasepj.service.GoodService;
+import com.example.databasepj.service.ProductService;
+import com.example.databasepj.tools.GoodProduct;
 import com.example.databasepj.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GoodController {
     @Autowired
     GoodService goodService;
+
+    @Autowired
+    ProductService productService;
 
     @CrossOrigin
     @RequestMapping(value = "api/queryGood")
@@ -25,6 +33,14 @@ public class GoodController {
         return goodService.getGoodByGoodName(goodname);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "api/queryGoodWithDetail")
+    @ResponseBody
+    public GoodProduct queryGoodWithDetail(@RequestBody Map<String, Integer> param){
+        int goodID = param.get("goodID");
+        int productID = param.get("productID");
+        return new GoodProduct(goodService.getGoodById(goodID), productService.getProductById(productID));
+    }
 
     @CrossOrigin
     @RequestMapping(value = "api/addGood")
@@ -58,4 +74,6 @@ public class GoodController {
         good.setCurrentPrice(newPrice);
         return goodService.updatePrice(good);
     }
+
+
 }

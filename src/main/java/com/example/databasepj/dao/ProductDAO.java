@@ -51,13 +51,11 @@ public class ProductDAO {
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setProductID(resultSet.getInt("ProductID"));
-                product.setProductName(resultSet.getString("productName"));
-                product.setProductCategory(resultSet.getString("productCategory"));
-                product.setMerchantID(resultSet.getInt("merchantID"));
-                product.setPlatformID(resultSet.getInt("platformID"));
-                product.setProductOrigin(resultSet.getString("productOrigin"));
-                product.setProductionDate(resultSet.getDate("productionDate"));
-                product.setShelfLife(resultSet.getInt("shelfLife"));
+                product.setProductName(resultSet.getString("ProductName"));
+                product.setProductCategory(resultSet.getString("ProductCategory"));
+                product.setProductOrigin(resultSet.getString("ProductOrigin"));
+                product.setProductionDate(resultSet.getDate("ProductionDate"));
+                product.setShelfLife(resultSet.getInt("ShelfLife"));
                 products.add(product);
             }
 
@@ -79,13 +77,11 @@ public class ProductDAO {
                 if (resultSet.next()) {
                     product = new Product();
                     product.setProductID(resultSet.getInt("ProductID"));
-                    product.setProductName(resultSet.getString("productName"));
-                    product.setProductCategory(resultSet.getString("productCategory"));
-                    product.setMerchantID(resultSet.getInt("merchantID"));
-                    product.setPlatformID(resultSet.getInt("platformID"));
-                    product.setProductOrigin(resultSet.getString("productOrigin"));
-                    product.setProductionDate(resultSet.getDate("productionDate"));
-                    product.setShelfLife(resultSet.getInt("shelfLife"));
+                    product.setProductName(resultSet.getString("ProductName"));
+                    product.setProductCategory(resultSet.getString("ProductCategory"));
+                    product.setProductOrigin(resultSet.getString("ProductOrigin"));
+                    product.setProductionDate(resultSet.getDate("ProductionDate"));
+                    product.setShelfLife(resultSet.getInt("ShelfLife"));
                 }
             }
 
@@ -128,8 +124,6 @@ public class ProductDAO {
 
             statement.setString(1, product.getProductName());
             statement.setString(2, product.getProductCategory());
-            statement.setInt(3, product.getMerchantID());
-            statement.setInt(4, product.getPlatformID());
             statement.setString(5, product.getProductOrigin());
             statement.setDate(6, product.getProductionDate());
             statement.setInt(7, product.getShelfLife());
